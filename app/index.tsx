@@ -1,17 +1,18 @@
-import { useCallback, useState } from "react";
+import { useMemo, useState } from "react";
 import { Button, Text, View } from "react-native";
 
 export default function Index() {
-  const [count, setCount] = useState<number>(0);
+  const [numero, setNumero] = useState<number>(0);
 
-  const increment = useCallback(() => {
-    setCount((prev) => prev + 1);
-  }, []);
+  const dobro = useMemo(() => {
+    return numero * 2;
+  }, [numero]);
 
   return (
     <View>
-      <Text>Contagem: {count}</Text>
-      <Button title="Incrementar" onPress={increment} />
+      <Text>Numero: {numero}</Text>
+      <Text>Dobro: {dobro}</Text>
+      <Button title="Aumentar" onPress={() => setNumero((prev) => prev + 1)} />
     </View>
   );
 }
