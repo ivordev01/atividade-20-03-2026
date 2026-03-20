@@ -1,12 +1,24 @@
-import { Link } from "expo-router";
-import { Text, View } from "react-native";
+import { useRef } from "react";
+import { Button, TextInput, View } from "react-native";
 
 export default function Index() {
+  const inputRef = useRef<TextInput>(null);
+  function focusInput() {
+    inputRef.current?.focus();
+  }
   return (
     <View>
-      <Link href="/user/1?nome=joao">
-        <Text>Ir para ID 1</Text>
-      </Link>
+      <TextInput
+        ref={inputRef}
+        style={{
+          borderWidth: 1,
+          borderColor: "#ccc",
+          padding: 10,
+          marginBottom: 20,
+          marginTop: 20,
+        }}
+      />
+      <Button title="Focar" onPress={focusInput} />
     </View>
   );
 }
