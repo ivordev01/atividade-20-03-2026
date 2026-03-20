@@ -1,24 +1,17 @@
-import { useRef } from "react";
-import { Button, TextInput, View } from "react-native";
+import { useCallback, useState } from "react";
+import { Button, Text, View } from "react-native";
 
 export default function Index() {
-  const inputRef = useRef<TextInput>(null);
-  function focusInput() {
-    inputRef.current?.focus();
-  }
+  const [count, setCount] = useState<number>(0);
+
+  const increment = useCallback(() => {
+    setCount((prev) => prev + 1);
+  }, []);
+
   return (
     <View>
-      <TextInput
-        ref={inputRef}
-        style={{
-          borderWidth: 1,
-          borderColor: "#ccc",
-          padding: 10,
-          marginBottom: 20,
-          marginTop: 20,
-        }}
-      />
-      <Button title="Focar" onPress={focusInput} />
+      <Text>Contagem: {count}</Text>
+      <Button title="Incrementar" onPress={increment} />
     </View>
   );
 }
