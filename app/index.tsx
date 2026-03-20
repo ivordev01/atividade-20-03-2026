@@ -1,18 +1,22 @@
-import { useMemo, useState } from "react";
+import { useAuth } from "@/hooks/useauth";
 import { Button, Text, View } from "react-native";
 
 export default function Index() {
-  const [numero, setNumero] = useState<number>(0);
-
-  const dobro = useMemo(() => {
-    return numero * 2;
-  }, [numero]);
+  const { user, login, logout } = useAuth();
 
   return (
     <View>
-      <Text>Numero: {numero}</Text>
-      <Text>Dobro: {dobro}</Text>
-      <Button title="Aumentar" onPress={() => setNumero((prev) => prev + 1)} />
+      {user ? (
+        <>
+          <Text>Bem-vindo, {user.nome}!</Text>
+          <Button title="Logout" onPress={logout} />
+        </>
+      ) : (
+        <>
+          <Text>Você não está logado.</Text>
+          <Button title="Login" onPress={() => login("João")} />
+        </>
+      )}
     </View>
   );
 }
